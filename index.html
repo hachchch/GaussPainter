@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>ガウスペインター</title>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    </head>
+    <style>
+        .sideText{
+            position:absolute;
+            left:690px;
+        }
+    </style>
+    <body>
+        <div class="sideText">
+            複素平面<br><canvas class="colorPicker" width="350" height="350"></canvas><br>
+            関数ペンを使用<input type="checkbox" onclick="pickerfuncmode=!pickerfuncmode; regenerateColorPool()" /><br>彩度<t id="sval">100</t><input type="range" min="0" max="100" id="w-axis" value="100" onchange="pen.w=this.value; regenerateColorPool(); document.getElementById('sval').innerHTML=this.value" /><br>
+            フレームごとに使用<input type="checkbox" onclick="useInPerFrame=!useInPerFrame" /><br>
+            <hr>
+            複素ペンのパラメータ：<canvas class="cv" width="18" height="18"></canvas><label id="cpenval"></label>
+            <hr>
+            使用中の関数ペン：<label id="usedcfunpen">なし</label><br>
+            関数ペンを作成><input type="text" placeholder="関数の名前..." id="funcname" /><textarea id="bpfuncpen"></textarea><input type="button" value="追加" onclick="add(document.getElementById('bpfuncpen').value,document.getElementById('funcname').value)" /><br>
+            <br>
+            関数ペン一覧
+            <div id="funcpens"></div>
+            <hr>
+            <input type="button" value="関数をセーブ" onclick="save(document.getElementById('fsname').value)" /><input type="text" placeholder="ファイル名" id="fsname" /><br>
+            <input type="button" value="関数をロード" onclick="load(document.getElementById('fsload').files[0])" /><input type="file" accept="application/JSON" id="fsload" />
+            </div>
+        <canvas class="canvas" width="640" height="640"></canvas><br>
+        <input type="button" id="pbtn" value="ペンモード" onclick="pen.type='pen'; document.getElementById('fbtn').disabled=false; this.disabled=true" disabled />
+        <input type="button" id="fbtn" value="塗りつぶし" onclick="pen.type='fill'; document.getElementById('pbtn').disabled=false; this.disabled=true" />
+        <br>
+        <input type="range" value="0" step="1" min="1" max="10" onchange="pen.radius=this.value; document.getElementById('rvalue').innerHTML=pen.radius" />ペンの半径<t id="rvalue">1</t>
+        <script type="text/javascript" src="../lib/mathematics.lib.js"></script>
+        <script type="text/javascript" src="main.js"></script>
+    </body>
+</html>
